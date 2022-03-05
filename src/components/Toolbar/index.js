@@ -342,12 +342,12 @@ export default class Toolbar extends Component {
             onPause={onPauseClock}
           />
         </div>
-        {solved ? null : this.renderCheckMenu()}
-        {solved ? null : this.renderRevealMenu()}
+        {/*  {solved ? null : this.renderCheckMenu()} */}
+        {/*  {solved ? null : this.renderRevealMenu()} */}
         <div className="toolbar--menu reset">{this.renderResetMenu()}</div>
-        {this.renderModeMenu()}
+        {/*  {this.renderModeMenu()} */}
         {this.renderPencil()}
-        {this.renderAutocheck()}
+        {/*  {this.renderAutocheck()} */}
         {this.renderInfo()}
       </div>
     );
