@@ -42,10 +42,25 @@ export default class Chat extends Component {
     return `username_${window.location.href}`;
   }
 
+  // https://stackoverflow.com/questions/39019094/reactjs-get-json-object-data-from-an-url
+  getHelpFromAIApiAsync = () => {
+    return fetch('http://127.0.0.1:5000/')
+      .then((response) => response.text())
+      .then((body) => {
+        console.log(body);
+        this.props.onChat('AI Assistant', 99999, body);
+      })
+      .catch((error) => {
+        console.log(error);
+        console.error(error);
+      });
+  };
+
   handleSendMessage = (message) => {
     const {id} = this.props;
     const username = this.props.users[id].displayName;
     this.props.onChat(username, id, message);
+    this.getHelpFromAIApiAsync();
     localStorage.setItem(this.usernameKey, username);
   };
 
@@ -356,8 +371,10 @@ export default class Chat extends Component {
       <Flex column grow={1}>
         {this.renderToolbar()}
         <div className="chat">
-          {this.renderChatHeader()}
-          {this.renderChatSubheader()}
+          {/* {this.renderChatHeader()} */}
+          <div>Need help? You can ask an AI assistant questions!</div>
+          {/* {this.renderChatSubheader()} */}
+          {this.renderChatBar()}
           <div
             ref={(el) => {
               if (el) {
@@ -367,7 +384,7 @@ export default class Chat extends Component {
             className="chat--messages"
           >
             <div className="chat--message chat--system-message">
-              <div>
+              {/* <div>
                 <i>
                   Game created! Share the link to play with your friends:
                   <wbr />
@@ -381,13 +398,18 @@ export default class Chat extends Component {
                   title="Copy to Clipboard"
                   onClick={this.handleCopyClick}
                 />
-              </div>
+              </div> */}
             </div>
+            {/*}
+            {messages.map((message, i) => (
+              <div key={i}>{this.renderMessage(message)}</div>
+            ))}
+            */}
             {messages.map((message, i) => (
               <div key={i}>{this.renderMessage(message)}</div>
             ))}
           </div>
-          {this.renderChatBar()}
+          {/* {this.renderChatBar()} */}
         </div>
       </Flex>
     );
