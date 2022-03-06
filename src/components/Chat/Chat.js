@@ -43,8 +43,8 @@ export default class Chat extends Component {
   }
 
   // https://stackoverflow.com/questions/39019094/reactjs-get-json-object-data-from-an-url
-  getHelpFromAIApiAsync = () => {
-    return fetch('http://127.0.0.1:5000/')
+  getHelpFromAIApiAsync = (message) => {
+    return fetch('http://127.0.0.1:5000/?query=' + message)
       .then((response) => response.text())
       .then((body) => {
         console.log(body);
@@ -60,7 +60,7 @@ export default class Chat extends Component {
     const {id} = this.props;
     const username = this.props.users[id].displayName;
     this.props.onChat(username, id, message);
-    this.getHelpFromAIApiAsync();
+    this.getHelpFromAIApiAsync(message);
     localStorage.setItem(this.usernameKey, username);
   };
 
@@ -329,11 +329,13 @@ export default class Chat extends Component {
     const big = text.length <= 10 && isEmojis(text);
     const color = this.getMessageColor(id, isOpponent);
     const users = this.props.users;
+    console.log(users);
 
     return (
       <div className={`chat--message${big ? ' big' : ''}`}>
         <div className="chat--message--content">
-          {this.renderMessageSender(users[id]?.displayName ?? 'Unknown', color)}
+          {/* {this.renderMessageSender(users[id]?.displayName ?? 'Unknown', color)} */}
+          {this.renderMessageSender((users[id]?.displayName ?? 'Unknown') == 'Unknown' ? 'AI' : 'You', color)}
           {this.renderMessageText(message.text)}
         </div>
         <div className="chat--message--timestamp">{this.renderMessageTimestamp(timestamp)}</div>
