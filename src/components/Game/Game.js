@@ -83,10 +83,25 @@ export default class Game extends Component {
     return [];
   }
 
+  // https://stackoverflow.com/questions/39019094/reactjs-get-json-object-data-from-an-url
+  logPlayerAction(message) {
+    return fetch('http://127.0.0.1:5000/log?message=' + message)
+      .then((response) => response.text())
+      .then((body) => {
+        console.debug(body);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   handleUpdateGrid = (r, c, value) => {
     const {id, myColor} = this.props;
     const {pencilMode} = this.state;
     const {autocheckMode} = this.state;
+    const log_message = `CellUpdate,${r},${c},${value}`;
+    console.log('*** MBS: ' + log_message);
+    this.logPlayerAction(log_message);
     if (autocheckMode) {
       this.gameModel.updateCellAutocheck(r, c, id, myColor, pencilMode, value);
     } else {

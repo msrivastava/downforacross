@@ -329,7 +329,6 @@ export default class Chat extends Component {
     const big = text.length <= 10 && isEmojis(text);
     const color = this.getMessageColor(id, isOpponent);
     const users = this.props.users;
-    console.log(users);
 
     return (
       <div className={`chat--message${big ? ' big' : ''}`}>
