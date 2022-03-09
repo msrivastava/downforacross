@@ -12,6 +12,7 @@ import ChatBar from './ChatBar';
 import EditableSpan from '../common/EditableSpan';
 import MobileKeyboard from '../Player/MobileKeyboard';
 import ColorPicker from './ColorPicker.tsx';
+import {apiAskAI} from '../../lib/apiserver';
 
 const isEmojis = (str) => {
   const res = str.match(/[A-Za-z,.0-9!-]/g);
@@ -42,25 +43,11 @@ export default class Chat extends Component {
     return `username_${window.location.href}`;
   }
 
-  // https://stackoverflow.com/questions/39019094/reactjs-get-json-object-data-from-an-url
-  getHelpFromAIApiAsync = (message) => {
-    return fetch('http://127.0.0.1:5000/?query=' + message)
-      .then((response) => response.text())
-      .then((body) => {
-        console.log(body);
-        this.props.onChat('AI Assistant', 99999, body);
-      })
-      .catch((error) => {
-        console.log(error);
-        console.error(error);
-      });
-  };
-
   handleSendMessage = (message) => {
     const {id} = this.props;
     const username = this.props.users[id].displayName;
     this.props.onChat(username, id, message);
-    this.getHelpFromAIApiAsync(message);
+    apiAskAI(message, id + 1, this.props.onChat);
     localStorage.setItem(this.usernameKey, username);
   };
 
