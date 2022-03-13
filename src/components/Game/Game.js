@@ -88,14 +88,15 @@ export default class Game extends Component {
     const {id, myColor} = this.props;
     const {pencilMode} = this.state;
     const {autocheckMode} = this.state;
-    const log_message = `CellUpdate,${r},${c},${value}`;
+    const log_message = `CellUpdate,${id},${r},${c},${value}`;
     console.log('*** MBS: ' + log_message);
-    apiLogMessage(log_message);
+    apiLogMessage(log_message + ',' + JSON.stringify(this.rawGame));
     if (autocheckMode) {
       this.gameModel.updateCellAutocheck(r, c, id, myColor, pencilMode, value);
     } else {
       this.gameModel.updateCell(r, c, id, myColor, pencilMode, value);
     }
+    // console.log(JSON.stringify(this.gameModel))
     this.props.onChange({isEdit: true});
 
     this.props.battleModel && this.props.battleModel.checkPickups(r, c, this.rawGame, this.props.team);
@@ -131,18 +132,30 @@ export default class Game extends Component {
   };
 
   handleCheck = (scopeString) => {
+    const {id} = this.props;
     const scope = this.scope(scopeString);
+    const log_message = `Check,${id},${scopeString},${JSON.stringify(scope)}`;
+    console.log('*** MBS: ' + log_message);
+    apiLogMessage(log_message);
     this.props.gameModel.check(scope);
   };
 
   handleReveal = (scopeString) => {
+    const {id} = this.props;
     const scope = this.scope(scopeString);
+    const log_message = `Reveal,${id},${scopeString},${JSON.stringify(scope)}`;
+    console.log('*** MBS: ' + log_message);
+    apiLogMessage(log_message);
     this.props.gameModel.reveal(scope);
     this.props.onChange();
   };
 
   handleReset = (scopeString) => {
+    const {id} = this.props;
     const scope = this.scope(scopeString);
+    const log_message = `Reset,${id},${scopeString},${JSON.stringify(scope)}`;
+    console.log('*** MBS: ' + log_message);
+    apiLogMessage(log_message);
     this.props.gameModel.reset(scope);
   };
 

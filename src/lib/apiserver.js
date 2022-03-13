@@ -1,6 +1,7 @@
 // https://stackoverflow.com/questions/39019094/reactjs-get-json-object-data-from-an-url
+
 export const apiLogMessage = (message) => {
-  return fetch('http://127.0.0.1:5000/log?message=' + message)
+  return fetch(`http://127.0.0.1:5000/log?message=${message}`)
     .then((response) => response.text())
     .then((body) => {
       console.debug(body);
@@ -10,13 +11,12 @@ export const apiLogMessage = (message) => {
     });
 };
 
-// https://stackoverflow.com/questions/39019094/reactjs-get-json-object-data-from-an-url
-export const apiAskAI = (message, id, onChat) => {
-  return fetch('http://127.0.0.1:5000/ask?query=' + message)
+export const apiAskAI = (query, uid, onChat) => {
+  return fetch(`http://127.0.0.1:5000/ask?uid=${uid}&query=${query}`)
     .then((response) => response.text())
     .then((body) => {
       console.log(body);
-      onChat('AI Assistant', id, body);
+      onChat('AI Assistant', uid, body);
     })
     .catch((error) => {
       console.log(error);
