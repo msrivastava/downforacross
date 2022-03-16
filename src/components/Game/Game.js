@@ -209,7 +209,7 @@ export default class Game extends Component {
         true
       ) {
         const code = Math.floor(Math.random() * 1000000);
-        window.alert(`Okay, I will quit! Your code is ${code}`);
+        window.alert(`Okay, I will quit! Your secret code is ${code}`);
         const log_message = `GiveUp,${id},${code}`;
         console.log('*** MBS: ' + log_message);
         apiLogMessage(log_message);
@@ -376,11 +376,11 @@ export default class Game extends Component {
       return <div>Game Status: Unsolved</div>;
     } else {
       const {id} = this.props;
-      const log_message = `Solved,${JSON.stringify(this.rawGame)}}`;
+      const log_message = `Solved,${id},${JSON.stringify(this.rawGame)}}`;
       console.log('*** MBS: ' + log_message);
       apiLogMessage(log_message);
       const code = Math.floor(Math.random() * 1000000);
-      return <div>Game Status: Solved (Your Code = {code})</div>;
+      return <div>Game Status: Solved (Your secret code = {code})</div>;
     }
   }
 
