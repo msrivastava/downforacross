@@ -469,6 +469,7 @@ export default class Player extends Component {
             </div>
             <div>
               <ConnectionStats />
+              <div>{'User id: ' + this.props.id}</div>
             </div>
           </div>
         )}

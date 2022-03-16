@@ -184,6 +184,20 @@ export default class Toolbar extends Component {
     );
   }
 
+  renderGiveup() {
+    const {onGiveUp} = this.props;
+    return (
+      <button
+        className="toolbar--btn giveup"
+        tabIndex={-1}
+        onMouseDown={this.handleMouseDown}
+        onClick={onGiveUp}
+      >
+        I Give Up!
+      </button>
+    );
+  }
+
   renderInfo() {
     return (
       <div className="toolbar--info">
@@ -321,8 +335,8 @@ export default class Toolbar extends Component {
               onStart={onStartClock}
               onPause={onPauseClock}
             />
-            {solved ? null : this.renderCheckMenu()}
-            {solved ? null : this.renderRevealMenu()}
+            {/* {solved ? null : this.renderCheckMenu()} */}
+            {/* {solved ? null : this.renderRevealMenu()} */}
             {this.renderChatButton()}
           </Flex>
         </Flex>
@@ -348,6 +362,7 @@ export default class Toolbar extends Component {
         {/*  {this.renderModeMenu()} */}
         {this.renderPencil()}
         {/*  {this.renderAutocheck()} */}
+        {this.renderGiveup()}
         {this.renderInfo()}
       </div>
     );

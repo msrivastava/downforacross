@@ -193,6 +193,40 @@ export default class Game extends Component {
     this.props.onToggleChat();
   };
 
+  handleGiveUp = () => {
+    const {id} = this.props;
+    const minutes_played = document
+      .getElementsByClassName('clock')[0]
+      .innerHTML.replace(/[{()}]/g, '')
+      .split(':')[0];
+    console.log('*** MBS: ' + minutes_played);
+    // alert(minutes_played);
+    if (parseInt(minutes_played, 10) < 1) {
+      alert(`You have only played ${minutes_played} minutes. Can't quit yet!`);
+    } else {
+      if (
+        window.confirm(`You have played ${minutes_played} minutes. Are you sure that you want to quit?`) ==
+        true
+      ) {
+        const code = Math.floor(Math.random() * 1000000);
+        window.alert(`Okay, I will quit! Your code is ${code}`);
+        const log_message = `GiveUp,${id},${code}`;
+        console.log('*** MBS: ' + log_message);
+        apiLogMessage(log_message);
+        //this.props.gameModel.reset(scope);
+        this.handleReset('puzzle');
+        this.handleResetClock();
+        //console.log('*** MBS: totalTime=' + this.rawGame.clock.totalTime);
+        //console.log('*** MBS: ' + JSON.stringify(this.rawGame.clock));
+        //Object.keys(this.props).forEach((prop)=> console.log('*** MBS: '+prop));
+        //console.log('*** MBS: ' +JSON.stringify(this, null, 4))
+        // this.props.gameModel.reset(scope);
+      } else {
+        window.alert(`Okay, I will not quit!`);
+      }
+    }
+  };
+
   handleRefocus = () => {
     this.focus();
   };
@@ -326,6 +360,7 @@ export default class Game extends Component {
         onTogglePencil={this.handleTogglePencil}
         onToggleAutocheck={this.handleToggleAutocheck}
         onToggleChat={this.handleToggleChat}
+        onGiveUp={this.handleGiveUp}
         colorAttributionMode={this.state.colorAttributionMode}
         onToggleColorAttributionMode={() => {
           this.setState((prevState) => ({colorAttributionMode: !prevState.colorAttributionMode}));
@@ -334,6 +369,19 @@ export default class Game extends Component {
         unreads={this.props.unreads}
       />
     );
+  }
+
+  renderGameStatus() {
+    if (!this.game.solved) {
+      return <div>Game Status: Unsolved</div>;
+    } else {
+      const {id} = this.props;
+      const log_message = `Solved,${JSON.stringify(this.rawGame)}}`;
+      console.log('*** MBS: ' + log_message);
+      apiLogMessage(log_message);
+      const code = Math.floor(Math.random() * 1000000);
+      return <div>Game Status: Solved (Your Code = {code})</div>;
+    }
   }
 
   render() {
@@ -350,6 +398,7 @@ export default class Game extends Component {
           {this.renderPlayer()}
         </Flex>
         {this.game.solved && !this.props.mobile && <Confetti />}
+        {this.renderGameStatus()}
       </Flex>
     );
   }
