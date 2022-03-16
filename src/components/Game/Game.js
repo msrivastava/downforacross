@@ -373,14 +373,14 @@ export default class Game extends Component {
 
   renderGameStatus() {
     if (!this.game.solved) {
-      return <div>Game Status: Unsolved</div>;
+      return <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Game Status: Unsolved</div>;
     } else {
       const {id} = this.props;
       const log_message = `Solved,${id},${JSON.stringify(this.rawGame)}}`;
       console.log('*** MBS: ' + log_message);
       apiLogMessage(log_message);
       const code = Math.floor(Math.random() * 1000000);
-      return <div>Game Status: Solved (Your secret code = {code})</div>;
+      return <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Game Status: Solved (Your secret code = {code})</div>;
     }
   }
 
