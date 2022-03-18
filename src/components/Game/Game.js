@@ -128,6 +128,10 @@ export default class Game extends Component {
   };
 
   handleResetClock = () => {
+    const {id} = this.props;
+    const log_message = `ResetClock,${id}`;
+    console.log('*** MBS: ' + log_message);
+    apiLogMessage(log_message + ',' + JSON.stringify(this.rawGame));
     this.props.gameModel.updateClock('reset');
   };
 
