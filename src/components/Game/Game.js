@@ -11,6 +11,7 @@ import Toolbar from '../Toolbar';
 import {toArr} from '../../lib/jsUtils';
 import {toHex, darken, GREENISH} from '../../lib/colors';
 import {apiLogMessage} from '../../lib/apiserver';
+import {useEffect} from 'react';
 
 // component for gameplay -- incl. grid/clues & toolbar
 export default class Game extends Component {
@@ -33,7 +34,28 @@ export default class Game extends Component {
       screenWidth,
     });
     this.componentDidUpdate({});
+    window.addEventListener('focus', this.onFocus);
+    window.addEventListener('blur', this.onBlur);
   }
+
+  componentWillUnmount() {
+    window.removeEventListener('focus', this.onFocus);
+    window.removeEventListener('blur', this.onBlur);
+  }
+
+  onFocus = () => {
+    const {id} = this.props;
+    const log_message = `GameInFocus,${id},${Date.now()}`;
+    console.log('*** MBS: ' + log_message);
+    apiLogMessage(log_message + ',' + JSON.stringify(this.rawGame));
+  };
+
+  onBlur = () => {
+    const {id} = this.props;
+    const log_message = `GameBlurred,${id},${Date.now()}`;
+    console.log('*** MBS: ' + log_message);
+    apiLogMessage(log_message + ',' + JSON.stringify(this.rawGame));
+  };
 
   componentDidUpdate(prevProps) {
     if (prevProps.myColor !== this.props.myColor) {
