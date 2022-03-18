@@ -81,7 +81,7 @@ export default function Nav({hidden, v2, canLogin, mobile, linkStyle, divRef}) {
   return (
     <div className={classnames('nav', {mobile})} ref={divRef}>
       <div className="nav--left" style={linkStyle}>
-        <Link to={fencing ? '/fencing' : '/'}>Down for a Cross</Link>
+        <Link to={fencing ? '/fencing' : '#'}>AI-assisted Down for a Cross</Link>
       </div>
       <div className="nav--right">
         <div className="molester-moon" onClick={toggleMolesterMoons}>
