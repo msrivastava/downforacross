@@ -117,7 +117,7 @@ export default class ChatBar extends React.Component {
       <input
         ref={this.input}
         className={this.props.mobile ? 'chat--bar--input--mobile' : 'chat--bar--input'}
-        placeholder="[Enter] to chat"
+        placeholder="[Enter] to chat with AI"
         value={this.state.message}
         onChange={this.handleChange}
         onKeyDown={this.handleKeyDown}

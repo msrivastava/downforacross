@@ -8,6 +8,7 @@ import swal from '@sweetalert/with-react';
 import Clock from './Clock';
 import ActionMenu from './ActionMenu';
 import Popup from './Popup';
+import {apiLogMessage} from '../../lib/apiserver';
 
 export default class Toolbar extends Component {
   handleBlur = () => {
@@ -53,6 +54,14 @@ export default class Toolbar extends Component {
   handleToggleChat = (e) => {
     e.preventDefault();
     this.props.onToggleChat();
+  };
+
+  handleClearChat = () => {
+    const {id} = this.props;
+    const log_message = `ClearChat,${id}`;
+    console.log('*** MBS: ' + log_message);
+    apiLogMessage(log_message);
+    document.getElementsByClassName('chat--messages')[0].innerHTML = '';
   };
 
   renderClockControl() {
@@ -110,7 +119,7 @@ export default class Toolbar extends Component {
     );
   }
 
-  renderResetMenu() {
+  renderResetMenuOriginal() {
     return (
       <ActionMenu
         label="Reset"
@@ -120,6 +129,20 @@ export default class Toolbar extends Component {
           Word: this.reset.bind(this, 'word'),
           Puzzle: this.reset.bind(this, 'puzzle'),
           'Puzzle and Timer': this.resetPuzzleAndTimer.bind(this),
+        }}
+      />
+    );
+  }
+
+  renderResetMenu() {
+    return (
+      <ActionMenu
+        label="Reset"
+        onBlur={this.handleBlur}
+        actions={{
+          Square: this.reset.bind(this, 'square'),
+          Word: this.reset.bind(this, 'word'),
+          Puzzle: this.reset.bind(this, 'puzzle'),
         }}
       />
     );
@@ -193,7 +216,21 @@ export default class Toolbar extends Component {
         onMouseDown={this.handleMouseDown}
         onClick={onGiveUp}
       >
-        I Give Up!
+        Finish Playing
+      </button>
+    );
+  }
+
+  renderClearChat() {
+    const {onClearChat} = this.props;
+    return (
+      <button
+        className="toolbar--btn clearchat"
+        tabIndex={-1}
+        onMouseDown={this.handleMouseDown}
+        onClick={this.handleClearChat}
+      >
+        Clear Chat
       </button>
     );
   }
@@ -363,6 +400,7 @@ export default class Toolbar extends Component {
         {this.renderPencil()}
         {/*  {this.renderAutocheck()} */}
         {this.renderGiveup()}
+        {this.renderClearChat()}
         {this.renderInfo()}
       </div>
     );

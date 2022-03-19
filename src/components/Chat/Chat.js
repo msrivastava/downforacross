@@ -228,7 +228,7 @@ export default class Chat extends Component {
       <ChatBar
         ref={this.chatBar}
         mobile={this.props.mobile}
-        placeHolder="[Enter] to chat"
+        placeHolder="[Enter] to chat with AI"
         onSendMessage={this.handleSendMessage}
         onUnfocus={this.handleUnfocus}
       />
@@ -360,7 +360,12 @@ export default class Chat extends Component {
         {this.renderToolbar()}
         <div className="chat">
           {/* {this.renderChatHeader()} */}
-          <div>Need help? You can ask an AI assistant questions!</div>
+          <div>
+            Need help? Try talking to your friendly AI teammate! <br /> <br />
+            Remember, example of ways to chat with the AI teammate can be found here [LINK]. Sometimes the AI
+            might be wrong, or give an unclear response - please don&#39;t hesistate to try sending the same
+            or a new message again! &#128522;
+          </div>
           {/* {this.renderChatSubheader()} */}
           {this.renderChatBar()}
           <div
@@ -388,7 +393,7 @@ export default class Chat extends Component {
                 />
               </div> */}
             </div>
-            {/*}
+            {/*
             {messages.map((message, i) => (
               <div key={i}>{this.renderMessage(message)}</div>
             ))}
