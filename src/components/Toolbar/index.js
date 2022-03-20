@@ -57,10 +57,11 @@ export default class Toolbar extends Component {
   };
 
   handleClearChat = () => {
-    const {id} = this.props;
-    const log_message = `ClearChat,${id}`;
-    console.log('*** MBS: ' + log_message);
-    apiLogMessage(log_message);
+    // const {id} = this.props;
+    // const log_message = `ClearChat,${id},${Date.now()}`;
+    // Object.keys(this.props).forEach((prop)=> console.log('*** MBS: '+prop));
+    // console.log('*** MBS: ' + log_message);
+    // apiLogMessage(`${log_message},${window.location.href}`);
     document.getElementsByClassName('chat--messages')[0].innerHTML = '';
   };
 

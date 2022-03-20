@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import ReactDOM from 'react-dom';
 import React from 'react';
 
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import {isMobile} from './lib/jsUtils';
 import {
   Account,
@@ -37,6 +37,8 @@ const Root = () => {
         <div className={classnames('router-wrapper', {mobile: isMobile(), dark: darkMode})}>
           <Switch>
             <Route exact path="/" component={Welcome} />
+            {/* uncomment below to make home point to a specific puzzle */}
+            {/* <Route exact path="/">{<Redirect to="/beta/play/150" />}</Route> */}
             <Route exact path="/fencing">
               <Welcome fencing />
             </Route>

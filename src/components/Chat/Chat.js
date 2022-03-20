@@ -44,10 +44,12 @@ export default class Chat extends Component {
   }
 
   handleSendMessage = (message) => {
+    //Object.keys(this.props.game).forEach((prop)=> console.log('*** MBS: '+prop));
     const {id} = this.props;
+    const {pid} = this.props.game;
     const username = this.props.users[id].displayName;
     this.props.onChat(username, id, message);
-    apiAskAI(message, id + 1, this.props.onChat);
+    apiAskAI(message, id, pid, this.props.onChat);
     localStorage.setItem(this.usernameKey, username);
   };
 

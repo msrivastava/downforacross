@@ -11,12 +11,16 @@ export const apiLogMessage = (message) => {
     });
 };
 
-export const apiAskAI = (query, uid, onChat) => {
-  return fetch(`http://127.0.0.1:5000/ask?uid=${uid}&query=${query}`)
+export const apiAskAI = (query, uid, pid, onChat) => {
+  return fetch(
+    `http://127.0.0.1:5000/ask?uid=${uid}&pid=${pid}&query=${query}&timestamp=${Date.now()}&url=${
+      window.location.href
+    }`
+  )
     .then((response) => response.text())
     .then((body) => {
       console.log(body);
-      onChat('AI Assistant', uid, body);
+      onChat('AI Assistant', uid + '.AI', body);
     })
     .catch((error) => {
       console.log(error);
