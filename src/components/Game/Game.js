@@ -48,7 +48,12 @@ export default class Game extends Component {
     const {pid} = this.rawGame;
     const log_message = `GameInFocus,${id},${pid},${Date.now()}`;
     console.log('*** MBS: ' + log_message);
-    apiLogMessage(`${log_message},${window.location.href},${JSON.stringify(this.rawGame)}`);
+    const gameState = {
+      grid: this.rawGame.grid,
+      solution: this.rawGame.solution,
+      clock: this.rawGame.clock,
+    };
+    apiLogMessage(`${log_message},${window.location.href},${JSON.stringify(gameState)}`);
   };
 
   onBlur = () => {
@@ -56,7 +61,12 @@ export default class Game extends Component {
     const {pid} = this.rawGame;
     const log_message = `GameBlurred,${id},${pid},${Date.now()}`;
     console.log('*** MBS: ' + log_message);
-    apiLogMessage(`${log_message},${window.location.href},${JSON.stringify(this.rawGame)}`);
+    const gameState = {
+      grid: this.rawGame.grid,
+      solution: this.rawGame.solution,
+      clock: this.rawGame.clock,
+    };
+    apiLogMessage(`${log_message},${window.location.href},${JSON.stringify(gameState)}`);
   };
 
   componentDidUpdate(prevProps) {
@@ -115,7 +125,12 @@ export default class Game extends Component {
     const {autocheckMode} = this.state;
     const log_message = `CellUpdate,${id},${pid},${Date.now()},${r},${c},${value}`;
     console.log('*** MBS: ' + log_message);
-    apiLogMessage(`${log_message},${window.location.href},${JSON.stringify(this.rawGame)}`);
+    const gameState = {
+      grid: this.rawGame.grid,
+      solution: this.rawGame.solution,
+      clock: this.rawGame.clock,
+    };
+    apiLogMessage(`${log_message},${window.location.href},${JSON.stringify(gameState)}`);
     if (autocheckMode) {
       this.gameModel.updateCellAutocheck(r, c, id, myColor, pencilMode, value);
     } else {
@@ -157,7 +172,12 @@ export default class Game extends Component {
     const {pid} = this.rawGame;
     const log_message = `ResetClock,${id},${pid},${Date.now()}`;
     console.log('*** MBS: ' + log_message);
-    apiLogMessage(`${log_message},${window.location.href},${JSON.stringify(this.rawGame)}`);
+    const gameState = {
+      grid: this.rawGame.grid,
+      solution: this.rawGame.solution,
+      clock: this.rawGame.clock,
+    };
+    apiLogMessage(`${log_message},${window.location.href},${JSON.stringify(gameState)}`);
     this.props.gameModel.updateClock('reset');
   };
 
@@ -167,7 +187,12 @@ export default class Game extends Component {
     const scope = this.scope(scopeString);
     const log_message = `Check,${id},${pid},${Date.now()},${scopeString}`;
     console.log('*** MBS: ' + log_message);
-    apiLogMessage(`${log_message},${window.location.href},${JSON.stringify(this.rawGame)}`);
+    const gameState = {
+      grid: this.rawGame.grid,
+      solution: this.rawGame.solution,
+      clock: this.rawGame.clock,
+    };
+    apiLogMessage(`${log_message},${window.location.href},${JSON.stringify(gameState)}`);
     this.props.gameModel.check(scope);
   };
 
@@ -177,7 +202,12 @@ export default class Game extends Component {
     const scope = this.scope(scopeString);
     const log_message = `Reveal,${id},${pid},${Date.now()},${scopeString}`;
     console.log('*** MBS: ' + log_message);
-    apiLogMessage(`${log_message},${window.location.href},${JSON.stringify(this.rawGame)}`);
+    const gameState = {
+      grid: this.rawGame.grid,
+      solution: this.rawGame.solution,
+      clock: this.rawGame.clock,
+    };
+    apiLogMessage(`${log_message},${window.location.href},${JSON.stringify(gameState)}`);
     this.props.gameModel.reveal(scope);
     this.props.onChange();
   };
@@ -188,7 +218,12 @@ export default class Game extends Component {
     const scope = this.scope(scopeString);
     const log_message = `Reset,${id},${pid},${Date.now()},${scopeString}`;
     console.log('*** MBS: ' + log_message);
-    apiLogMessage(`${log_message},${window.location.href},${JSON.stringify(this.rawGame)}`);
+    const gameState = {
+      grid: this.rawGame.grid,
+      solution: this.rawGame.solution,
+      clock: this.rawGame.clock,
+    };
+    apiLogMessage(`${log_message},${window.location.href},${JSON.stringify(gameState)}`);
     this.props.gameModel.reset(scope);
   };
 
@@ -246,7 +281,12 @@ export default class Game extends Component {
         window.alert(`Okay, I will quit! Your secret code is ${code}`);
         const log_message = `GiveUp,${id},${pid},${Date.now()},${code}`;
         console.log('*** MBS: ' + log_message);
-        apiLogMessage(`${log_message},${window.location.href},${JSON.stringify(this.rawGame)}`);
+        const gameState = {
+          grid: this.rawGame.grid,
+          solution: this.rawGame.solution,
+          clock: this.rawGame.clock,
+        };
+        apiLogMessage(`${log_message},${window.location.href},${JSON.stringify(gameState)}`);
         //this.props.gameModel.reset(scope);
         this.handleReset('puzzle');
         this.handleResetClock();
@@ -414,7 +454,12 @@ export default class Game extends Component {
       const code = Math.floor(Math.random() * 1000000000);
       const log_message = `Solved,${id},${pid},${Date.now()},${code}`;
       console.log('*** MBS: ' + log_message);
-      apiLogMessage(`${log_message},${window.location.href},${JSON.stringify(this.rawGame)}`);
+      const gameState = {
+        grid: this.rawGame.grid,
+        solution: this.rawGame.solution,
+        clock: this.rawGame.clock,
+      };
+      apiLogMessage(`${log_message},${window.location.href},${JSON.stringify(gameState)}`);
       return <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Game Status: Solved (Your secret code = {code})</div>;
     }
   }

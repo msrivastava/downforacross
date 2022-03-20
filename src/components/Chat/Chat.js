@@ -48,8 +48,16 @@ export default class Chat extends Component {
     const {id} = this.props;
     const {pid} = this.props.game;
     const username = this.props.users[id].displayName;
+    var message_array = [
+      'Please wait a few moments!',
+      'One second...',
+      'Just one moment!',
+      'Preparing my response...',
+    ];
     this.props.onChat(username, id, message);
+    this.props.onChat('AI', id + '.AI', message_array[Math.floor(Math.random() * message_array.length)]);
     apiAskAI(message, id, pid, this.props.onChat);
+    console.log(`*** MBS: Ask,${id},${pid},${Date.now()},${message}`);
     localStorage.setItem(this.usernameKey, username);
   };
 

@@ -394,15 +394,15 @@ export default class Toolbar extends Component {
             onPause={onPauseClock}
           />
         </div>
+        {this.renderInfo()}
+        {this.renderPencil()}
         {/*  {solved ? null : this.renderCheckMenu()} */}
         {/*  {solved ? null : this.renderRevealMenu()} */}
-        <div className="toolbar--menu reset">{this.renderResetMenu()}</div>
         {/*  {this.renderModeMenu()} */}
-        {this.renderPencil()}
         {/*  {this.renderAutocheck()} */}
+        <div className="toolbar--menu reset">{this.renderResetMenu()}</div>
         {this.renderGiveup()}
         {this.renderClearChat()}
-        {this.renderInfo()}
       </div>
     );
   }

@@ -19,8 +19,8 @@ export const apiAskAI = (query, uid, pid, onChat) => {
   )
     .then((response) => response.text())
     .then((body) => {
-      console.log(body);
-      onChat('AI Assistant', uid + '.AI', body);
+      console.log(`*** MBS: ${body}`);
+      onChat('AI', uid + '.AI', body);
     })
     .catch((error) => {
       console.log(error);
