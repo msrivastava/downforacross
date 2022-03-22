@@ -1,7 +1,8 @@
 // https://stackoverflow.com/questions/39019094/reactjs-get-json-object-data-from-an-url
 
 export const apiLogMessage = (message) => {
-  return fetch(`http://127.0.0.1:5000/log?message=${message}`)
+  console.log(`*** MBS: apiLogMessage: ${message}`);
+  return fetch(`http://127.0.0.1:5000/log?message=${encodeURIComponent(message)}`)
     .then((response) => response.text())
     .then((body) => {
       console.debug(body);
