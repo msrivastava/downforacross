@@ -231,7 +231,7 @@ export default class Toolbar extends Component {
         onMouseDown={this.handleMouseDown}
         onClick={this.handleClearChat}
       >
-        Clear Chat
+        <strong>Clear Chat with AI</strong>
       </button>
     );
   }

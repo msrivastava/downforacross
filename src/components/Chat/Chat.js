@@ -371,10 +371,10 @@ export default class Chat extends Component {
         <div className="chat">
           {/* {this.renderChatHeader()} */}
           <div>
-            Need help? Try talking to your friendly AI teammate! <br /> <br />
+            Need help? Try talking to your AI teammate! <br />
             Remember, example of ways to chat with the AI teammate can be found here [LINK]. Sometimes the AI
-            might be wrong, or give an unclear response - please don&#39;t hesistate to try sending the same
-            or a new message again! &#128522;
+            might be wrong, or give an unclear response - feel free to try sending the same or a new message
+            again! &#128522;
           </div>
           {/* {this.renderChatSubheader()} */}
           {this.renderChatBar()}

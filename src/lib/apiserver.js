@@ -14,9 +14,9 @@ export const apiLogMessage = (message) => {
 
 export const apiAskAI = (query, uid, pid, onChat) => {
   return fetch(
-    `http://127.0.0.1:5000/ask?uid=${uid}&pid=${pid}&query=${query}&timestamp=${Date.now()}&url=${
+    `http://127.0.0.1:5000/ask?uid=${uid}&pid=${pid}&query=${query}&timestamp=${Date.now()}&url=${encodeURIComponent(
       window.location.href
-    }`
+    )}`
   )
     .then((response) => response.text())
     .then((body) => {
