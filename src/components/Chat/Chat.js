@@ -233,6 +233,16 @@ export default class Chat extends Component {
     );
   }
 
+  renderSelectedClue() {
+    console.log(this);
+    return (
+      <div className="chat--display--clue">
+        <br />
+        Querying AI for clue {sessionStorage.getItem('selected_clue_desc')}.
+      </div>
+    );
+  }
+
   renderChatBar() {
     return this.props.hideChatBar ? null : (
       <ChatBar
@@ -377,6 +387,8 @@ export default class Chat extends Component {
             again! &#128522;
           </div>
           {/* {this.renderChatSubheader()} */}
+          {}
+          {this.renderSelectedClue()}
           {this.renderChatBar()}
           <div
             ref={(el) => {

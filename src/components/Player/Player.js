@@ -242,6 +242,10 @@ export default class Player extends Component {
   }
 
   isClueSelected(direction, number) {
+    if (direction === this.state.direction && number === this.getSelectedClueNumber()) {
+      const desc = `${number} ${direction}`;
+      sessionStorage.setItem('selected_clue_desc', desc);
+    }
     return direction === this.state.direction && number === this.getSelectedClueNumber();
   }
 
