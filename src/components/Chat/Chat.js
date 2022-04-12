@@ -387,7 +387,6 @@ export default class Chat extends Component {
             again! &#128522;
           </div>
           {/* {this.renderChatSubheader()} */}
-          {}
           {this.renderSelectedClue()}
           {this.renderChatBar()}
           <div
