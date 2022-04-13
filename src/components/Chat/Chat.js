@@ -234,7 +234,6 @@ export default class Chat extends Component {
   }
 
   renderSelectedClue() {
-    console.log(this);
     return (
       <div className="chat--display--clue">
         <br />

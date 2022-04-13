@@ -17,6 +17,8 @@ import ConnectionStats from './ConnectionStats';
 import {lightenHsl} from '../../lib/colors';
 import * as gameUtils from '../../lib/gameUtils';
 
+import {apiLogMessage} from '../../lib/apiserver';
+
 const CURSOR_TIMEOUT = 60000;
 const PING_TIMEOUT = 10000;
 /*
@@ -244,7 +246,23 @@ export default class Player extends Component {
   isClueSelected(direction, number) {
     if (direction === this.state.direction && number === this.getSelectedClueNumber()) {
       const desc = `${number} ${direction}`;
+      const desc_old = sessionStorage.getItem('selected_clue_desc');
       sessionStorage.setItem('selected_clue_desc', desc);
+      if (desc != desc_old) {
+        const {id} = this.props;
+        //const {pid} = this.rawGame;
+        const pid = -1;
+        const log_message = `NewClueSelected,${id},${pid},${Date.now()},${number},${direction}`;
+        console.log(this);
+        console.log('*** MBS: ' + log_message);
+        const gameState = {
+          grid: this.props.grid,
+          solution: this.props.solution,
+          //clock: this.rawGame.clock,
+          //clues: this.clues
+        };
+        apiLogMessage(`${log_message},${window.location.href},${JSON.stringify(gameState)}`);
+      }
     }
     return direction === this.state.direction && number === this.getSelectedClueNumber();
   }
