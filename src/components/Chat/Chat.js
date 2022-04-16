@@ -237,7 +237,7 @@ export default class Chat extends Component {
     return (
       <div className="chat--display--clue">
         <br />
-        Querying AI for clue {sessionStorage.getItem('selected_clue_desc')}.
+        Chat about Clue <b>{sessionStorage.getItem('selected_clue_desc')}</b>:
       </div>
     );
   }
@@ -380,10 +380,10 @@ export default class Chat extends Component {
         <div className="chat">
           {/* {this.renderChatHeader()} */}
           <div>
-            Need help? Try talking to your AI teammate! <br />
-            Remember, example of ways to chat with the AI teammate can be found here [LINK]. Sometimes the AI
-            might be wrong, or give an unclear response - feel free to try sending the same or a new message
-            again! &#128522;
+            Need help with a clue? Try talking to your AI teammate! <br /> 
+            Example of ways to chat with an AI teammate can be found <a href="https://drive.google.com/file/d/1qZETWXMYi3IpIBRiQHs5dNRxZZgWH-T-/view" target="_blank">here</a> .
+            Sometimes the AI might be wrong, or give an unclear response - feel free to try sending the same
+            or a new message again! &#128522;
           </div>
           {/* {this.renderChatSubheader()} */}
           {this.renderSelectedClue()}

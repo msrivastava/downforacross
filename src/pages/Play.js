@@ -100,6 +100,7 @@ export default class Play extends Component {
         solved: false,
         v2: true,
       });
+      sessionStorage.setItem('current_pid',this.pid);
       redirect(this.is_fencing ? `/fencing/${gid}` : `/beta/game/${gid}${window.location.search}`);
     });
   }

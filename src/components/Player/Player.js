@@ -251,7 +251,8 @@ export default class Player extends Component {
       if (desc != desc_old) {
         const {id} = this.props;
         //const {pid} = this.rawGame;
-        const pid = -1;
+        //const pid = -1;
+        const pid = sessionStorage.getItem('current_pid');
         const log_message = `NewClueSelected,${id},${pid},${Date.now()},${number},${direction}`;
         console.log(this);
         console.log('*** MBS: ' + log_message);
@@ -259,7 +260,7 @@ export default class Player extends Component {
           grid: this.props.grid,
           solution: this.props.solution,
           //clock: this.rawGame.clock,
-          //clues: this.clues
+          clues: this.props.clues
         };
         apiLogMessage(`${log_message},${window.location.href},${JSON.stringify(gameState)}`);
       }

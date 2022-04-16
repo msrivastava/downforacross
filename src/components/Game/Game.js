@@ -46,11 +46,13 @@ export default class Game extends Component {
   onFocus = () => {
     const {id} = this.props;
     const {pid} = this.rawGame;
+    sessionStorage.setItem('current_pid',pid);
     const log_message = `GameInFocus,${id},${pid},${Date.now()}`;
     console.log('*** MBS: ' + log_message);
     const gameState = {
       grid: this.rawGame.grid,
       solution: this.rawGame.solution,
+      clues: this.rawGame.clues,
       clock: this.rawGame.clock,
     };
     apiLogMessage(`${log_message},${window.location.href},${JSON.stringify(gameState)}`);
@@ -59,11 +61,13 @@ export default class Game extends Component {
   onBlur = () => {
     const {id} = this.props;
     const {pid} = this.rawGame;
+    sessionStorage.setItem('current_pid',pid);
     const log_message = `GameBlurred,${id},${pid},${Date.now()}`;
     console.log('*** MBS: ' + log_message);
     const gameState = {
       grid: this.rawGame.grid,
       solution: this.rawGame.solution,
+      clues: this.rawGame.clues,
       clock: this.rawGame.clock,
     };
     apiLogMessage(`${log_message},${window.location.href},${JSON.stringify(gameState)}`);
@@ -121,6 +125,7 @@ export default class Game extends Component {
   handleUpdateGrid = (r, c, value) => {
     const {id, myColor} = this.props;
     const {pid} = this.rawGame;
+    sessionStorage.setItem('current_pid',pid);
     const {pencilMode} = this.state;
     const {autocheckMode} = this.state;
     const log_message = `CellUpdate,${id},${pid},${Date.now()},${r},${c},${value}`;
@@ -128,6 +133,7 @@ export default class Game extends Component {
     const gameState = {
       grid: this.rawGame.grid,
       solution: this.rawGame.solution,
+      clues: this.rawGame.clues,
       clock: this.rawGame.clock,
     };
     apiLogMessage(`${log_message},${window.location.href},${JSON.stringify(gameState)}`);
@@ -170,11 +176,13 @@ export default class Game extends Component {
   handleResetClock = () => {
     const {id} = this.props;
     const {pid} = this.rawGame;
+    sessionStorage.setItem('current_pid',pid);
     const log_message = `ResetClock,${id},${pid},${Date.now()}`;
     console.log('*** MBS: ' + log_message);
     const gameState = {
       grid: this.rawGame.grid,
       solution: this.rawGame.solution,
+      clues: this.rawGame.clues,
       clock: this.rawGame.clock,
     };
     apiLogMessage(`${log_message},${window.location.href},${JSON.stringify(gameState)}`);
@@ -184,12 +192,14 @@ export default class Game extends Component {
   handleCheck = (scopeString) => {
     const {id} = this.props;
     const {pid} = this.rawGame;
+    sessionStorage.setItem('current_pid',pid);
     const scope = this.scope(scopeString);
     const log_message = `Check,${id},${pid},${Date.now()},${scopeString}`;
     console.log('*** MBS: ' + log_message);
     const gameState = {
       grid: this.rawGame.grid,
       solution: this.rawGame.solution,
+      clues: this.rawGame.clues,
       clock: this.rawGame.clock,
     };
     apiLogMessage(`${log_message},${window.location.href},${JSON.stringify(gameState)}`);
@@ -199,12 +209,14 @@ export default class Game extends Component {
   handleReveal = (scopeString) => {
     const {id} = this.props;
     const {pid} = this.rawGame;
+    sessionStorage.setItem('current_pid',pid);
     const scope = this.scope(scopeString);
     const log_message = `Reveal,${id},${pid},${Date.now()},${scopeString}`;
     console.log('*** MBS: ' + log_message);
     const gameState = {
       grid: this.rawGame.grid,
       solution: this.rawGame.solution,
+      clues: this.rawGame.clues,
       clock: this.rawGame.clock,
     };
     apiLogMessage(`${log_message},${window.location.href},${JSON.stringify(gameState)}`);
@@ -215,12 +227,14 @@ export default class Game extends Component {
   handleReset = (scopeString) => {
     const {id} = this.props;
     const {pid} = this.rawGame;
+    sessionStorage.setItem('current_pid',pid);
     const scope = this.scope(scopeString);
     const log_message = `Reset,${id},${pid},${Date.now()},${scopeString}`;
     console.log('*** MBS: ' + log_message);
     const gameState = {
       grid: this.rawGame.grid,
       solution: this.rawGame.solution,
+      clues: this.rawGame.clues,
       clock: this.rawGame.clock,
     };
     apiLogMessage(`${log_message},${window.location.href},${JSON.stringify(gameState)}`);
@@ -264,6 +278,7 @@ export default class Game extends Component {
   handleGiveUp = () => {
     const {id} = this.props;
     const {pid} = this.rawGame;
+    sessionStorage.setItem('current_pid',pid);
     const minutes_played = document
       .getElementsByClassName('clock')[0]
       .innerHTML.replace(/[{()}]/g, '')
@@ -284,6 +299,7 @@ export default class Game extends Component {
         const gameState = {
           grid: this.rawGame.grid,
           solution: this.rawGame.solution,
+          clues: this.rawGame.clues,
           clock: this.rawGame.clock,
         };
         apiLogMessage(`${log_message},${window.location.href},${JSON.stringify(gameState)}`);
@@ -451,12 +467,14 @@ export default class Game extends Component {
     } else {
       const {id} = this.props;
       const {pid} = this.rawGame;
+      sessionStorage.setItem('current_pid',pid);
       const code = Math.floor(Math.random() * 1000000000);
       const log_message = `Solved,${id},${pid},${Date.now()},${code}`;
       console.log('*** MBS: ' + log_message);
       const gameState = {
         grid: this.rawGame.grid,
         solution: this.rawGame.solution,
+        clues: this.rawGame.clues,
         clock: this.rawGame.clock,
       };
       apiLogMessage(`${log_message},${window.location.href},${JSON.stringify(gameState)}`);
